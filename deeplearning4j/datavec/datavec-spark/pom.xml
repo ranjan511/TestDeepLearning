@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2015-2018 Skymind, Inc.
+  ~
+  ~ This program and the accompanying materials are made available under the
+  ~ terms of the Apache License, Version 2.0 which is available at
+  ~ https://www.apache.org/licenses/LICENSE-2.0.
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  ~ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing permissions and limitations
+  ~ under the License.
+  ~
+  ~ SPDX-License-Identifier: Apache-2.0
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>datavec-parent</artifactId>
+        <groupId>org.datavec</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent> 
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.datavec</groupId>
+    <artifactId>datavec-spark_2.12</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Default scala versions, may be overwritten by build profiles -->
+        <scala.version>2.12.10</scala.version>
+        <scala.binary.version>2.12</scala.binary.version>
+		<maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
+        <maven.compiler.testSource>1.8</maven.compiler.testSource>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <deeplearning4j.version>1.0.0-SNAPSHOT</deeplearning4j.version>
+        <dl4j.version>1.0.0-SNAPSHOT</dl4j.version>
+        <nd4j.version>1.0.0-SNAPSHOT</nd4j.version>
+        <datavec.version>1.0.0-SNAPSHOT</datavec.version>
+        <dl4j-test-resources.version>1.0.0-SNAPSHOT</dl4j-test-resources.version>
+
+        <jackson-asl.version>1.9.13</jackson-asl.version>
+        <asm.version>5.1</asm.version>
+        <arrow.version>0.11.0</arrow.version>
+        <avro.version>1.7.7</avro.version>
+        <curator.version>2.8.0</curator.version>
+        <guice.version>4.0</guice.version>
+        <hibernate.version>5.1.3.Final</hibernate.version>
+        <hppc.version>0.8.1</hppc.version>
+        <httpclient.version>4.5.3</httpclient.version>
+        <httpcore.version>4.4.6</httpcore.version>
+        <httpmime.version>4.5.3</httpmime.version>
+        <janino.version>2.7.8</janino.version>
+ <janino.version>2.7.8</janino.version>
+        <javassist.version>3.19.0-GA</javassist.version>
+        <jaxb.version>2.2.11</jaxb.version>
+        <jets3t.version>0.7.1</jets3t.version>
+        <jetty.version>9.4.10.v20180503</jetty.version>
+        <jersey.version>2.29</jersey.version>
+        <jsch.version>0.1.51</jsch.version>
+        <leveldb.version>1.8</leveldb.version>
+        <lz4.version>1.3.0</lz4.version>
+        <metrics.version>3.2.6</metrics.version>
+        <netty.version>3.10.4.Final</netty.version>
+        <objenesis.version>2.6</objenesis.version>
+        <paranamer.version>2.6</paranamer.version>
+        <ws.rs.version>2.0</ws.rs.version>
+        <servlet.version>3.1.0</servlet.version>
+        <snakeyaml.version>1.12</snakeyaml.version>
+        <snappy.version>1.1.2.6</snappy.version>
+        <spring.version>5.1.1.RELEASE</spring.version>
+        <t-digest.version>3.2</t-digest.version>
+
+        <oshi.version>3.4.2</oshi.version>
+        <kafka.version>0.8.2.2</kafka.version>
+        <typesafe.config.version>1.3.0</typesafe.config.version>
+        <py4j.version>0.10.4</py4j.version>
+        <jcommander.version>1.27</jcommander.version>
+        <dropwizard.version>0.8.0</dropwizard.version>
+        <jodatime.version>2.2</jodatime.version>
+        <protonpack.version>1.15</protonpack.version>
+        <poi.version>3.17</poi.version>
+        <jodah.typetools.version>0.5.0</jodah.typetools.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <geoip2.version>2.8.1</geoip2.version>
+        <stream.analytics.version>2.7.0</stream.analytics.version>
+        <opencsv.version>2.3</opencsv.version>
+        <tdigest.version>3.2</tdigest.version>
+        <jtransforms.version>3.1</jtransforms.version>
+<unirest.version>1.4.9</unirest.version>
+        <reflections.version>0.9.10</reflections.version>
+        <breeze.version>1.0</breeze.version>
+
+        <javacpp.parser.skip>false</javacpp.parser.skip>     <!-- To skip header file parsing phase: -Djavacpp.parser.skip=true  -->
+        <javacpp.compiler.skip>false</javacpp.compiler.skip> <!-- To skip native compilation phase: -Djavacpp.compiler.skip=true -->
+        <javacpp.platform.root/>      <!-- -Djavacpp.platform.root=/path/to/android-ndk/ -->
+        <javacpp.platform.compiler/>  <!-- -Djavacpp.platform.compiler=/path/to/arm-linux-androideabi-g++ -->
+        <javacpp.platform.sysroot/>   <!-- -Djavacpp.platform.sysroot=$(xcrun -sdk iphoneos -show-sdk-path) -->
+        <javacpp.platform.extension/> <!-- -Djavacpp.platform.extension=-avx512 -->
+        <javacpp.platform.properties>${javacpp.platform}</javacpp.platform.properties>
+
+        <javacpp.version>1.5.1-1</javacpp.version>
+        <javacpp-presets.version>1.5.1</javacpp-presets.version>
+        <javacv.version>1.5.1</javacv.version>
+
+        <python.version>3.7.3</python.version>
+        <cpython-platform.version>${python.version}-${javacpp-presets.version}</cpython-platform.version>
+
+        <openblas.version>0.3.6</openblas.version>
+        <mkl.version>2019.4</mkl.version>
+        <mkl-dnn.version>0.20</mkl-dnn.version>
+        <mkl-dnn.javacpp.version>${mkl-dnn.version}-${javacpp-presets.version}</mkl-dnn.javacpp.version>
+        <opencv.version>4.1.0</opencv.version>
+        <ffmpeg.version>4.1.3</ffmpeg.version>
+        <leptonica.version>1.78.0</leptonica.version>
+        <hdf5.version>1.10.5</hdf5.version>
+        <ale.version>0.6.0</ale.version>
+        <tensorflow.version>1.14.0</tensorflow.version>
+        <tensorflow.javacpp.version>${tensorflow.version}-${javacpp-presets.version}</tensorflow.javacpp.version>
+
+        <commons-compress.version>1.18</commons-compress.version>
+        <commonsmath.version>3.5</commonsmath.version>
+        <commonslang.version>3.6</commonslang.version>
+ 	<spark.version>3.0.0</spark.version>
+        <spark.major.version>3</spark.major.version>
+        <args4j.version>2.0.29</args4j.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <junit.version>4.12</junit.version>
+        <logback.version>1.2.3</logback.version>
+        <jackson.version>2.9.9</jackson.version>
+        <jackson.databind.version>2.9.9.3</jackson.databind.version>
+        <shaded.snakeyaml.version>1.23</shaded.snakeyaml.version>
+        <geo.jackson.version>2.8.7</geo.jackson.version>
+        <lombok.version>1.18.2</lombok.version>
+        <cleartk.version>2.0.0</cleartk.version>
+        <lucene-solr.version>7.7.1</lucene-solr.version>
+        <json.version>20131018</json.version>
+        <google.protobuf.version>2.6.1</google.protobuf.version>
+        <failIfNoTests>false</failIfNoTests>
+        <hadoop.version>2.8.1</hadoop.version>
+	 <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-scala-plugin.version>3.3.1</maven-scala-plugin.version>
+        <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
+        <sbt-compiler-maven-plugin.version>1.0.0-beta8</sbt-compiler-maven-plugin.version>
+        <maven-git-commit-plugin.version>2.2.2</maven-git-commit-plugin.version>
+        <maven-git-commit-id-plugin.version>${maven-git-commit-plugin.version}
+        </maven-git-commit-id-plugin.version>
+        <maven-build-helper-plugin.version>3.0.0</maven-build-helper-plugin.version>
+        <maven-play2-plugin.version>1.0.0-beta5</maven-play2-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-surefire.version>${maven-surefire-plugin.version}</maven-surefire.version>
+        <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
+        <maven-lint-plugin.version>0.0.11</maven-lint-plugin.version>
+        <maven-formatter-plugin.version>2.0.0</maven-formatter-plugin.version>
+        <maven-lifecycle-mapping-plugin.version>1.0.0</maven-lifecycle-mapping-plugin.version>
+        <maven-lifecycle-mapping.version>${maven-lifecycle-mapping-plugin.version}
+        </maven-lifecycle-mapping.version>
+        <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
+        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+        <mockito.version>2.2.6</mockito.version>
+
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.12</artifactId>
+            <version>3.0.0-preview</version>
+            <!--<scope>provided</scope> -->
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.12</artifactId>
+            <version>3.0.0-preview</version>
+	<!--     <scope>provided</scope> -->
+            <exclusions>
+              <exclusion>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+              </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- For map/sequence file integrations -->
+        <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-hadoop</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+            <!-- Test scope dependencies -->
+        <!-- <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-data-image</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-data-codec</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+       <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-local</artifactId>
+            <version>${datavec.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.datavec</groupId>
+            <artifactId>datavec-python</artifactId>
+            <version>${datavec.version}</version>
+            <scope>test</scope>
+        </dependency> -->
+			
+    </dependencies>
+
+   <!-- <profiles>
+        <profile>
+            <id>test-nd4j-native</id>
+        </profile>
+        <profile>
+            <id>test-nd4j-cuda-10.1</id>
+        </profile>
+    </profiles>
+-->
+   <!-- <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                    <resource>META-INF/*.SF</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                    <resource>META-INF/*.DSA</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                    <resource>META-INF/*.RSA</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>-->
+</project>
