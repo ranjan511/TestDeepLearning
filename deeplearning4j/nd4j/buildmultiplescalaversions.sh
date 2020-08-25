@@ -35,9 +35,9 @@ function whatchanged() {
 }
 
 set -eu
-./change-scala-versions.sh 2.11 # should be idempotent, this is the default
+./../change-scala-versions.sh 2.12 # should be idempotent, this is the default
 mvn "$@"
-./change-scala-versions.sh 2.10
+./../change-scala-versions.sh 2.12
 if [ -z "$(whatchanged)" ]; then
     scalaError;
 else
@@ -50,4 +50,4 @@ else
         mvn "$@"
     fi
 fi
-./change-scala-versions.sh 2.11 #back to default
+./../change-scala-versions.sh 2.12 #back to default
